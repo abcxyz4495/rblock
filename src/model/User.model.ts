@@ -22,7 +22,7 @@ export const ChapterSchema: Schema<Chapter> = new Schema({
 	isPublished: { type: Boolean, default: false },
 });
 
-const ChapterModel =
+export const ChapterModel =
 	(mongoose.models.Chapter as mongoose.Model<Chapter>) ||
 	mongoose.model<Chapter>("Chapter", ChapterSchema);
 
@@ -52,7 +52,7 @@ const CourseSchema: Schema<Course> = new Schema({
 	},
 });
 
-const CourseModel =
+export const CourseModel =
 	(mongoose.models.Course as mongoose.Model<Course>) ||
 	mongoose.model<Course>("Course", CourseSchema);
 
