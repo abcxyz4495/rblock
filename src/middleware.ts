@@ -9,7 +9,7 @@ export async function middleware(req: NextRequest) {
 	console.log("[MIDDLEWARE_TOKEN]:", token, "| [PATHNAME]:", pathname);
 
 	if (token && token._id && pathname.startsWith("/sign-in")) {
-		return NextResponse.redirect(new URL("/", req.url));
+		return NextResponse.rewrite(new URL("/", req.url));
 	}
 	if (token && token.role !== "admin" && pathname.startsWith("/admin")) {
 		return NextResponse.redirect(new URL("/", req.url));
