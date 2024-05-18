@@ -8,11 +8,17 @@ export async function middleware(req: NextRequest) {
 
 	console.log("[MIDDLEWARE_TOKEN]:", token, "| [PATHNAME]:", pathname);
 
-	if (token && pathname === "/sign-in")
+	if (token && token._id && pathname.startsWith("/sign-in")) {
 		return NextResponse.redirect(new URL("/", req.url));
-	else if (token && token.role === "user" && pathname.startsWith("/admin"))
+	}
+	if (token && token.role !== "admin" && pathname.startsWith("/admin")) {
 		return NextResponse.redirect(new URL("/", req.url));
-	// else return NextResponse.rewrite(new URL("/sign-in", req.url));
+	}
+	if (!token && !pathname.startsWith("/sign-in")) {
+		return NextResponse.redirect(new URL("/sign-in", req.url));
+	}
+
+	return NextResponse.next();
 }
 
 export const config = {
