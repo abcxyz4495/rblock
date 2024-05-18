@@ -12,6 +12,7 @@ export async function middleware(req: NextRequest) {
 		return NextResponse.redirect(new URL("/", req.url));
 	else if (token && token.role === "user" && pathname.startsWith("/admin"))
 		return NextResponse.redirect(new URL("/", req.url));
+	// else return NextResponse.rewrite(new URL("/sign-in", req.url));
 }
 
 export const config = {

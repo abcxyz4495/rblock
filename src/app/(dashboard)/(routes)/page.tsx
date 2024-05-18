@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import dbConnect from "@/lib/dbConnect";
 import UserModel, { CourseModel, Course } from "@/model/User.model";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import React from "react";
 
@@ -42,7 +43,7 @@ async function Page() {
 				</div>
 			);
 	} else <div>No Course Found</div>;
-	return container;
+	return redirect("/sign-in");
 }
 
 export default Page;
