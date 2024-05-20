@@ -15,11 +15,8 @@ interface Props {
 
 export default async function Page({ searchParams }: Props) {
 	const session = await getServerSession(authOptions);
-	console.log("Sign-in Page Session", session);
 
-	return session?.user._id ? (
-		redirect("/")
-	) : (
+	return (
 		<div className="relative w-screen h-screen p-0 m-0">
 			<Image
 				src={Desktop1}

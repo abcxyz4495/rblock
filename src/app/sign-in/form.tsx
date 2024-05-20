@@ -36,23 +36,25 @@ export default function Form({ callbackUrl }: Props) {
 				userid: data.userid,
 				password: data.password,
 			});
+
 			if (!credentials) {
 				console.log("Invalid credentials");
 				return;
 			}
+			
 			toast({ variant: "success", description: "Submitting" });
+
 			const response = await signIn("credentials", {
 				...credentials?.data,
-				redirect: false,
+				redirect: true,
 			});
-			toast({ variant: "success", description: "response" });
-
+			
 			if (response && response?.ok) {
 				router.push(callbackUrl ? callbackUrl : "/");
 				router.refresh();
 				toast({ variant: "success", description: "Logged In" });
 			} else if (response && !response?.ok) {
-				console.error(response)
+				console.error(response);
 				toast({
 					variant: "destructive",
 					description: response?.error,

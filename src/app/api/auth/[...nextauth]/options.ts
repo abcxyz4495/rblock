@@ -21,7 +21,7 @@ export const authOptions: NextAuthOptions = {
 					const user = await UserModel.findOne({
 						userid: credentials.userid,
 					}).select("+password");
-					console.log(user);
+
 					if (!user) {
 						throw new Error("User not found");
 					}
@@ -57,7 +57,7 @@ export const authOptions: NextAuthOptions = {
 			return session;
 		},
 	},
-	session: { strategy: "jwt", maxAge: 1000 * 60 * 60 * 2 },
+	session: { strategy: "jwt" },
 	pages: { signIn: "/sign-in" },
 	jwt: { secret: process.env.NEXTAUTH_SECRET },
 };
