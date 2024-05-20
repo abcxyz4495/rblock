@@ -41,14 +41,16 @@ export default function Form({ callbackUrl }: Props) {
 				console.log("Invalid credentials");
 				return;
 			}
-			
+
 			toast({ variant: "success", description: "Submitting" });
 
 			const response = await signIn("credentials", {
 				...credentials?.data,
 				redirect: true,
 			});
-			
+
+			console.log("RESPONSE", response);
+
 			if (response && response?.ok) {
 				router.push(callbackUrl ? callbackUrl : "/");
 				router.refresh();
