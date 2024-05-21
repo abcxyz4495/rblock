@@ -20,3 +20,8 @@ export const apiAuthPrefix = "/api/auth";
  * @type {string}
  */
 export const DEFAULT_LOGIN_REDIRECT = "/";
+/**
+ * Admin route startswith /admin
+ * @type {string}
+ */
+export const adminRoutePrefix = "/admin";

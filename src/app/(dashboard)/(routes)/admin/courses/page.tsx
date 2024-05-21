@@ -11,7 +11,6 @@ import dbConnect from "@/lib/dbConnect";
 
 async function Page() {
 	const session = await getServerSession(authOptions);
-	console.log(session);
 
 	if (!session?.user) return redirect("/");
 

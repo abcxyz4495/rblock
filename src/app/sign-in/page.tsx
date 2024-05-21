@@ -21,7 +21,7 @@ export default async function Page({ searchParams }: Props) {
 			<Image
 				src={Desktop1}
 				alt="Desktop-Img"
-				className="absolute object-cover w-full h-full left-0 right-0 z-0"
+				className="absolute object-cover object-center w-full h-full left-0 right-0 z-0"
 			/>
 			<div className="absolute top-0 left-0 w-full h-screen z-10 flex justify-center items-center flex-col lg:flex-row lg:justify-evenly">
 				<div className="w-[270px] md:w-[375px]">

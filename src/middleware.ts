@@ -6,17 +6,19 @@ import {
 	apiAuthPrefix,
 	authRoutes,
 	publicRoutes,
+	adminRoutePrefix
 } from "../routes";
 
 export async function middleware(req: NextRequest) {
 	const token = await getToken({ req });
 	const { pathname } = req.nextUrl;
 	const isLoggedIn = !!token;
-	console.log(pathname, isLoggedIn);
+	const role = token?.role;
 
 	const isApiAuthRoute = pathname.startsWith(apiAuthPrefix);
 	const isPublicRoute = publicRoutes.includes(pathname);
 	const isAuthRoute = authRoutes.includes(pathname);
+	const adminRoute = pathname.startsWith(adminRoutePrefix);
 
 	if (isApiAuthRoute) return NextResponse.next();
 
@@ -25,6 +27,10 @@ export async function middleware(req: NextRequest) {
 			return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, req.nextUrl));
 		}
 		return NextResponse.next();
+	}
+
+	if (role !== "admin" && adminRoute) {
+		return Response.redirect(new URL("/unauthorized", req.nextUrl));
 	}
 
 	if (!isLoggedIn && !isPublicRoute) {

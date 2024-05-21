@@ -1,10 +1,9 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import { Button } from "@/components/ui/button";
 import dbConnect from "@/lib/dbConnect";
 import UserModel, { CourseModel, Course } from "@/model/User.model";
 import { getServerSession } from "next-auth";
-import Link from "next/link";
 import React from "react";
+import { CourseCard } from "../_components/course-card";
 
 async function Page() {
 	const session = await getServerSession(authOptions);
@@ -16,32 +15,50 @@ async function Page() {
 		course = await CourseModel.find({});
 		if (course.length)
 			container = (
-				<div>
+				<div className="flex justify-center items-center h-full gap-3 p-5 md:g-10 flex-wrap">
 					{course.length &&
 						course?.map((crs) => (
-							<Link
-								className="p-4"
+							<CourseCard
 								key={crs?._id.toString()}
-								href={`/courses/${crs?._id.toString()}`}
-							>
-								<Button>{crs?.title}</Button>
-							</Link>
+								title={crs?.title}
+								imageURL={crs?.imageURL}
+								id={crs?._id.toString()}
+							/>
 						))}
+				</div>
+			);
+		else
+			container = (
+				<div className="w-full h-full flex justify-center items-center text-slate-900 font-semibold text-lg">
+					No Course Found
 				</div>
 			);
 	} else if (session?.user.role === "user") {
 		const user: any = await UserModel.findOne({
 			_id: session.user._id,
 		}).populate("course");
-		if (user?.course)
+		if (user?.course.isPublished)
 			container = (
-				<div>
-					<Link className="p-4" href={`/courses/${user.course?._id}`}>
-						<Button>{user.course?.title}</Button>
-					</Link>
+				<div className="flex justify-center items-center h-full">
+					<CourseCard
+						title={user.course?.title}
+						imageURL={user.course?.imageURL}
+						id={user.course._id.toString()}
+					/>
 				</div>
 			);
-	} else container = <div>No Course Found</div>;
+		else
+			container = (
+				<div className="w-full h-full flex justify-center items-center text-slate-900 font-semibold text-lg">
+					No Course Found
+				</div>
+			);
+	} else
+		container = (
+			<div className="w-full h-full flex justify-center items-center text-slate-900 font-semibold text-lg">
+				No Course Found
+			</div>
+		);
 	return container;
 }
 
