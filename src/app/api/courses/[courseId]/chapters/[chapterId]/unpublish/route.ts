@@ -19,7 +19,7 @@ export async function PATCH(
 				status: 404,
 				error: "UserId not found",
 			});
-		dbConnect();
+		await dbConnect();
 
 		const chapter = await ChapterModel.findById(params.chapterId);
 		if (!chapter)

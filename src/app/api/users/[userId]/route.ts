@@ -20,7 +20,7 @@ export async function PATCH(
 				status: 403,
 				error: "Access Forbidden",
 			});
-		dbConnect();
+		await dbConnect();
 		console.log("Values", values);
 
 		const user = await UserModel.findByIdAndUpdate(userId, { ...values });
@@ -58,7 +58,7 @@ export async function DELETE(
 				status: 403,
 				error: "Access Forbidden",
 			});
-		dbConnect();
+		await dbConnect();
 
 		await UserModel.findByIdAndDelete(userId);
 		return ApiResponse({

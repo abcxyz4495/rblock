@@ -37,9 +37,9 @@ async function Page() {
 		const user: any = await UserModel.findOne({
 			_id: session.user._id,
 		}).populate("course");
-		if (user?.course.isPublished)
+		if (user?.course && user?.course?.isPublished)
 			container = (
-				<div className="flex justify-center items-center h-full">
+				<div className="flex justify-center items-center h-full w-full">
 					<CourseCard
 						title={user.course?.title}
 						imageURL={user.course?.imageURL}

@@ -4,7 +4,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User.model";
 import { getErrorMessage } from "@/helper/errorHelper";
-import { signOut } from "next-auth/react";
 
 export const authOptions: NextAuthOptions = {
 	providers: [
@@ -42,7 +41,6 @@ export const authOptions: NextAuthOptions = {
 	],
 	callbacks: {
 		async jwt({ token, user }) {
-			console.log(user);
 			if (user) {
 				token._id = user._id?.toString();
 				token.userid = user.userid;

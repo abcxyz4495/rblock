@@ -23,6 +23,7 @@ import { redirect } from "next/navigation";
 import dbConnect from "@/lib/dbConnect";
 import UserModel, { Chapter, User as IUser } from "@/model/User.model";
 import { CourseModel } from "@/model/User.model";
+import UserActions from "../_components/user-actions";
 
 // interface CUSer extends IUser {
 // 	courseId: string;
@@ -85,12 +86,9 @@ export default async function Page({ params }: { params: { userId: string } }) {
 							<div className="flex flex-col gap-y-2">
 								<h1 className="text-2xl font-medium">Edit User</h1>
 							</div>
-							{/* <ChapterActions
-								disabled={!isComplete}
-								courseId={params.courseId}
-								chapterId={params.chapterId}
-								isPublished={chapter.isPublished}
-							/> */}
+							<UserActions
+								userId={params.userId}
+							/>
 						</div>
 					</div>
 				</div>

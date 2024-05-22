@@ -16,7 +16,7 @@ async function Page() {
 
 	if (!session?.user) return redirect("/");
 
-	dbConnect();
+	await dbConnect();
 	const users = await UserModel.find({}).select("+password");
 
 	const dupUser = users.map((user: User) => {

@@ -111,7 +111,7 @@ const UserCourse = ({
 									>
 										<FormControl>
 											<SelectTrigger>
-												<SelectValue placeholder="Select a role" />
+												<SelectValue placeholder="Select a Course" />
 											</SelectTrigger>
 										</FormControl>
 										<SelectContent>

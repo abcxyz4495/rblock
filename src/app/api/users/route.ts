@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 				status: 403,
 				error: "Access Forbidden",
 			});
-		dbConnect();
+		await dbConnect();
 
 		const user = await UserModel.findOne({ userid: values.userid });
 

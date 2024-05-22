@@ -14,7 +14,7 @@ async function Page() {
 
 	if (!session?.user) return redirect("/");
 
-	dbConnect();
+	await dbConnect();
 	const course = await CourseModel.find({});
 
 	const dupCourse = course.map((crs: any) => {
