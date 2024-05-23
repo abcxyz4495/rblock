@@ -66,7 +66,7 @@ async function Page() {
 			{container}{" "}
 			<div className="flex justify-end absolute bottom-0 right-0">
 				<Link
-					href={"https://wa.me/+917276365526"}
+					href={"https://wa.me/+917045820468"}
 					className="mr-4 mb-5 p-0 shadow-xl rounded"
 				>
 					<FaWhatsappSquare className="h-14 w-14 text-emerald-700" />
