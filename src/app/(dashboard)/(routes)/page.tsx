@@ -4,6 +4,8 @@ import UserModel, { CourseModel, Course } from "@/model/User.model";
 import { getServerSession } from "next-auth";
 import React from "react";
 import { CourseCard } from "../_components/course-card";
+import Link from "next/link";
+import { FaWhatsappSquare } from "react-icons/fa";
 
 async function Page() {
 	const session = await getServerSession(authOptions);
@@ -15,7 +17,7 @@ async function Page() {
 		course = await CourseModel.find({});
 		if (course.length)
 			container = (
-				<div className="flex justify-center items-center h-full gap-3 p-5 md:g-10 flex-wrap">
+				<div className="flex justify-center items-center h-[90%] gap-3 p-5 md:g-10 flex-wrap">
 					{course.length &&
 						course?.map((crs) => (
 							<CourseCard
@@ -29,7 +31,7 @@ async function Page() {
 			);
 		else
 			container = (
-				<div className="w-full h-full flex justify-center items-center text-slate-900 font-semibold text-lg">
+				<div className="w-full h-[90%] flex justify-center items-center text-slate-900 font-semibold text-lg">
 					No Course Found
 				</div>
 			);
@@ -49,17 +51,29 @@ async function Page() {
 			);
 		else
 			container = (
-				<div className="w-full h-full flex justify-center items-center text-slate-900 font-semibold text-lg">
+				<div className="w-full h-[90%] flex justify-center items-center text-slate-900 font-semibold text-lg">
 					No Course Found
 				</div>
 			);
 	} else
 		container = (
-			<div className="w-full h-full flex justify-center items-center text-slate-900 font-semibold text-lg">
+			<div className="w-full h-[90%] flex justify-center items-center text-slate-900 font-semibold text-lg">
 				No Course Found
 			</div>
 		);
-	return container;
+	return (
+		<div className="w-full h-full relative">
+			{container}{" "}
+			<div className="flex justify-end absolute bottom-0 right-0">
+				<Link
+					href={"https://wa.me/+917276365526"}
+					className="mr-4 mb-5 p-0 shadow-xl rounded"
+				>
+					<FaWhatsappSquare className="h-14 w-14 text-emerald-700" />
+				</Link>
+			</div>
+		</div>
+	);
 }
 
 export default Page;
